@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<digester-rules>
+  <pattern value="blogic-io/action">
+    <object-create-rule classname="jp.terasoluna.fw.service.thin.BLogicIO" />
+    <set-properties-rule>
+      <alias attr-name="path" prop-name="path" />
+    </set-properties-rule>
+
+    <pattern value="blogic-params">
+      <set-properties-rule>
+        <alias attr-name="bean-name" prop-name="inputBeanName" />
+      </set-properties-rule>
+      <pattern value="set-property">
+        <object-create-rule classname="jp.terasoluna.fw.service.thin.BLogicProperty" />
+        <set-properties-rule>
+          <alias attr-name="property" prop-name="property" />
+          <alias attr-name="blogic-property" prop-name="BLogicProperty" />
+          <alias attr-name="source" prop-name="source" />
+        </set-properties-rule>
+        <set-next-rule methodname="setBLogicParam" />
+      </pattern>
+    </pattern>
+
+    <pattern value="blogic-result">
+      <pattern value="set-property">
+        <object-create-rule classname="jp.terasoluna.fw.service.thin.BLogicProperty" />
+        <set-properties-rule>
+          <alias attr-name="property" prop-name="property" />
+          <alias attr-name="blogic-property" prop-name="BLogicProperty" />
+          <alias attr-name="dest" prop-name="dest" />
+        </set-properties-rule>
+        <set-next-rule methodname="setBLogicResult" />
+      </pattern>
+    </pattern>
+
+    <set-next-rule methodname="setBLogicIO" />
+  </pattern>
+</digester-rules>

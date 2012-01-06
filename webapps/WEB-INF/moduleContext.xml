@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+<!-- モジュール固有のBean定義 -->
+
+  <!-- 共通定義のインポート -->
+  <import resource="commonContext.xml" />
+
+<!-- ======================================== アクション・業務ロジック定義 -->
+  <!-- アクション定義 -->
+  <bean name="/welcome" scope="singleton"
+    class="jp.terasoluna.fw.web.struts.actions.ForwardAction" />
+
+</beans>

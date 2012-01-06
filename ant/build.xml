@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ======================================================================
+     ブランクプロジェクトをビルドするスクリプト
+     ====================================================================== -->
+<project name="project" default="deploy" basedir="..">
+
+	<!-- プロパティの読み込み -->
+	<property file="./ant/build.properties" />
+
+	<!-- クラスパスの設定 -->
+	<property name="classpath.lib" value="
+        ${lib.dir}/antlr-2.7.6.jar;
+        ${lib.dir}/aspectjweaver.jar;
+  	    ${lib.dir}/cglib-nodep-2.1_3.jar;
+        ${lib.dir}/commons-beanutils-1.7.0.jar;
+        ${lib.dir}/commons-digester-1.8.jar;
+        ${lib.dir}/commons-fileupload-1.2.jar;
+        ${lib.dir}/commons-jxpath-1.3.jar;
+        ${lib.dir}/commons-lang-2.3.jar;
+        ${lib.dir}/commons-logging-1.1.1.jar;
+        ${lib.dir}/commons-validator-1.3.1.jar;
+        ${lib.dir}/ibatis-2.3.4.726.jar;
+        ${lib.dir}/jakarta-oro-2.0.8.jar;
+        ${lib.dir}/log4j-1.2.15.jar;
+        ${webapsvr.lib.dir}/servlet-api.jar;
+        ${webapsvr.lib.dir}/jsp-api.jar;
+        ${lib.dir}/spring-webmvc-struts.jar;
+        ${lib.dir}/spring.jar;
+        ${lib.dir}/struts.jar;
+        ${lib.dir}/terasoluna-thin-server.jar" />
+
+	<!-- =================================
+          Warファイル、コンパイルされたクラスファイルの削除を行う。
+       ================================= -->
+	<target name="clean" description="war、クラスファイルの削除">
+		<delete file="${deploy.dir}/${context.name}.war" failonerror="false" />
+		<delete includeEmptyDirs="true" failonerror="false">
+			<fileset dir="${web.inf.dir}/classes" includes="**/*" />
+		</delete>
+	</target>
+
+	<!-- =================================
+          コンパイルを行う。
+       ================================= -->
+	<target name="compile" depends="clean" description="コンパイル実行">
+		<javac srcdir="${source.dir}" destdir="${web.inf.dir}/classes" classpath="${classpath.lib}" debug="on" />
+		<copy todir="${web.inf.dir}/classes">
+			<fileset dir="${source.dir}">
+				<include name="**/*.xml" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- =================================
+          native2asciiにてプロパティファイルのコード変換を行う。
+       ================================= -->
+	<target name="native2ascii" depends="compile" description="プロパティファイルのコード変換">
+		<delete file="${web.inf.dir}/classes">
+			<include name="*.properties" />
+		</delete>
+		<native2ascii encoding="Windows-31J" src="${source.dir}" dest="${web.inf.dir}/classes" includes="*.properties" ext=".properties" />
+	</target>
+
+	<!-- =================================
+          プロジェクトのデプロイを行う。
+       ================================= -->
+	<target name="deploy" depends="native2ascii" description="デプロイ実行">
+		<delete file="${deploy.dir}/${context.name}.war" failonerror="false" />
+		<delete file="${context.name}.war" failonerror="false" />
+		<jar jarfile="${context.name}.war" basedir="./webapps" />
+		<copy file="${context.name}.war" todir="${deploy.dir}" />
+		<delete file="${context.name}.war" failonerror="false" />
+	</target>
+
+	<!-- =================================
+          JavaDocの生成を行う。
+       ================================= -->
+	<target name="createJavaDoc" description="JavaDoc生成">
+		<delete dir="./doc/javadoc" />
+		<mkdir dir="./doc/javadoc" />
+		<javadoc classpath="${classpath.lib}" sourcepath="${source.dir}" destdir="./doc/javadoc" doctitle="${context.name}" windowtitle="${context.name}" use="true" splitindex="true" encoding="Windows-31J" private="true" packagenames="**/*">
+		</javadoc>
+	</target>
+</project>

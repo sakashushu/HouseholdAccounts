@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ========== Elements ==================== -->
+
+<!-- top level element -->
+<!ELEMENT blogic-io     (action*)>
+
+<!-- action -->
+<!ELEMENT action        (blogic-params?,blogic-result?)>
+<!ATTLIST action        path            CDATA #REQUIRED>
+
+<!-- blogic-params -->
+<!ELEMENT blogic-params  (set-property*)>
+<!ATTLIST blogic-params bean-name       CDATA #IMPLIED>
+
+<!-- blogic-result -->
+<!ELEMENT blogic-result  (set-property*)>
+
+<!-- set-property -->
+<!ELEMENT set-property  EMPTY>
+<!ATTLIST set-property  property        CDATA          #REQUIRED>
+<!ATTLIST set-property  blogic-property CDATA          #IMPLIED>
+<!ATTLIST set-property  source          CDATA          #IMPLIED>
+<!ATTLIST set-property  dest            CDATA          #IMPLIED>

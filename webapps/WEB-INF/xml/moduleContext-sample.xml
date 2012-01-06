@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<bean name="/HelloPrint" scope="prototype"
+			class="jp.terasoluna.fw.web.struts.actions.ForwardAction">
+	</bean>
+	<bean name="/DispatchSample" scope="prototype"
+			class="jp.terasoluna.fw.web.struts.actions.DispatchAction">
+	</bean>
+	<bean name="/ClearSessionSample" scope="prototype"
+			class="jp.terasoluna.fw.web.struts.actions.ClearSessionAction">
+		<!-- セッターインジェクションを用いて値を設定 -->
+		<property name="clearSessionKeys">
+			<list>
+				<value>key1</value>
+			</list>
+		</property>
+	</bean>
+	<bean name="/LogOffSample" scope="prototype"
+			class="jp.terasoluna.fw.web.struts.actions.LogoffAction">
+	</bean>
+	<bean name="BLogicServiceSample" scope="prototype"
+			class="blogic.service.BLogicServiceSample">
+	</bean>
+	<bean name="/BLogicSample" scope="prototype"
+			class="jp.terasoluna.fw.web.struts.actions.BLogicAction">
+		<property name="businessLogic">
+			<ref bean="BLogicServiceSample"/>
+		</property>
+	</bean>
+	
+	<bean name="BLogicServiceDBSample" scope="prototype"
+			class="blogic.service.BLogicServiceDBSample">
+			<property name="queryDAO">
+				<ref bean="queryDAO"/>
+			</property>
+	</bean>
+	<bean name="/DBSample" scope="prototype"
+			class="jp.terasoluna.fw.web.struts.actions.BLogicAction">
+		<property name="businessLogic">
+			<ref bean="BLogicServiceDBSample"/>
+		</property>
+	</bean>
+
+	<bean name="HHA_DetailSrchService" scope="prototype"
+			class="hha.blogic.service.HHA_DetailSrchService">
+			<property name="queryDAO">
+				<ref bean="queryDAO"/>
+			</property>
+	</bean>
+	<bean name="/HhaDetail" scope="prototype"
+			class="jp.terasoluna.fw.web.struts.actions.BLogicAction">
+		<property name="businessLogic">
+			<ref bean="HHA_DetailSrchService"/>
+		</property>
+	</bean>
+</beans>

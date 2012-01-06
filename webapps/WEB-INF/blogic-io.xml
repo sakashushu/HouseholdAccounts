@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE blogic-io PUBLIC "-//NTTDATA//DTD TERASOLUNA for Spring blogic-io 1.0//JA"
+                           "dtd/blogic-io.dtd">
+<!-- ビジネスロジック入出力定義 -->
+<blogic-io>
+<!--
+	<action path="/logon">
+		<blogic-params>
+			<set-property property="companyId" blogic-property="companyId" source="request" />
+			<set-property property="userId" blogic-property="userId" source="form" />
+			<set-property property="password" blogic-property="password" source="form" />
+			<set-property property="companyCodeMst" blogic-property="comCodeMst" source="application" />
+		</blogic-params>
+		<blogic-result>
+			<set-property property="longName" blogic-property="longName" dest="session" />
+		</blogic-result>
+	</action>
+-->
+
+	<action path="/DBSample">
+		<blogic-params bean-name="blogic.io.DBSampleInput">
+			<set-property property="search_kbn" blogic-property="search_kbn" source="form"/>
+			<set-property property="search_condition" blogic-property="search_condition" source="form"/>
+		</blogic-params>
+		<blogic-result>
+			<set-property property="search_result" blogic-property="search_result" dest="request"/>
+			<set-property property="hit_number" blogic-property="hit_number" dest="request"/>
+		</blogic-result>
+	</action>
+
+	<action path="/HhaDetail">
+		<blogic-params bean-name="hha.blogic.io.HHA_DetailInput">
+			<set-property property="year_fr" blogic-property="year_fr" source="form"/>
+			<set-property property="month_fr" blogic-property="month_fr" source="form"/>
+			<set-property property="year_to" blogic-property="year_to" source="form"/>
+			<set-property property="month_to" blogic-property="month_to" source="form"/>
+		</blogic-params>
+		<blogic-result>
+			<set-property property="detail_rslt" blogic-property="detail_rslt" dest="request"/>
+			<set-property property="strSelFlg" blogic-property="strSelFlg" dest="request"/>
+		</blogic-result>
+	</action>
+
+</blogic-io>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE blogic-io PUBLIC "-//NTTDATA//DTD TERASOLUNA for Spring blogic-io 1.0//JA"
+                           "dtd/blogic-io.dtd">
+<!-- ビジネスロジック入出力定義 -->
+<blogic-io>
+	<action path="/BLogicSample">
+		<blogic-params bean-name="blogic.io.BLogicSampleDto">
+			<set-property property="last_name" blogic-property="last_name" source="form"></set-property>
+			<set-property property="first_name" blogic-property="first_name" source="form"></set-property>
+		</blogic-params>
+		<blogic-result>
+			<set-property property="USER_VALUE_OBJECT" blogic-property="uvo" dest="session"></set-property>
+			<set-property property="last_name" blogic-property="last_name" dest="request"></set-property>
+			<set-property property="first_name" blogic-property="first_name" dest="request"></set-property>
+		</blogic-result>
+	</action>
+</blogic-io>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId">
+<wb-module deploy-name="terasoluna-spring-thin-blank">
+<wb-resource deploy-path="/" source-path="/webapps"/>
+<wb-resource deploy-path="/WEB-INF/classes" source-path="/sources"/>
+<property name="java-output-path" value="/webapps/WEB-INF/classes"/>
+<property name="context-root" value="terasoluna-spring-thin-blank"/>
+</wb-module>
+</project-modules>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+<!-- モジュール共通のBean定義 -->
+
+<!-- ======================================== トランザクション・AOP定義 -->
+  <!-- AOPの定義 -->
+  <!-- 
+    下記で指定したパターンのBeanに対してインタセプタを適用する。
+    BLogicからデータベースアクセスを行う場合は、下記のコメントアウトを解除して
+    BLogicに対するトランザクションの設定を有効にする。
+    モジュール毎のmoduleContext.xmlで定義されたBeanのみ対象となるので注意すること。
+   -->
+  <aop:config>
+    <aop:pointcut id="blogicBeans"  expression="bean(*BLogic)"/>
+    <aop:advisor 
+         pointcut-ref="blogicBeans" 
+         advice-ref="transactionInterceptor"/>
+  </aop:config>
+  
+</beans>

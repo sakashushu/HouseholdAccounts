@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="_helloPrintForm" type="action.form.HelloPrintForm"></form-bean>
+		<form-bean name="_dispatchSampleForm" type="action.form.DispatchSampleForm"></form-bean>
+		<form-bean name="_clearSessionSampleForm" type="action.form.ClearSessionSampleForm"></form-bean>
+		<form-bean name="_logOffSampleForm" type="action.form.LogOffSampleForm"></form-bean>
+		<form-bean name="_blogicSampleForm" type="action.form.BLogicSampleForm"></form-bean>
+		<form-bean name="_dbSampleForm" type="action.form.DBSampleForm"></form-bean>
+		<form-bean name="_hhaDetailForm" type="hha.action.form.HHA_DetailForm"></form-bean>
+	</form-beans>
+
+	<action-mappings type="jp.terasoluna.fw.web.struts.action.ActionMappingEx">
+		<action path="/HelloPrint"
+				name="_helloPrintForm"
+				scope="request"
+				parameter="/jsp/simple_app/helloprint.jsp">
+		</action>
+		<action path="/DispatchSample" name="_dispatchSampleForm">
+			<forward name="result" path="/jsp/dispatch_sample/dispatchResult.jsp"></forward>
+			<forward name="error" path="/jsp/dispatch_sample/dispatchError.jsp"></forward>
+			<forward name="default" path="/jsp/dispatch_sample/default.jsp"></forward>
+		</action>
+		<action path="/ClearSessionSample" name="_clearSessionSampleForm"
+				parameter="/jsp/clearsession_sample/clearSessionResult.jsp">
+		</action>
+		<action path="/LogOffSample" name="_logOffSampleForm"
+				parameter="/jsp/logoff_sample/logOffResult.jsp">
+		</action>
+		<action path="/BLogicSample" name="_blogicSampleForm">
+			<forward name="success" path="/jsp/blogic_sample/blogicResult.jsp"></forward>
+		</action>
+		<action path="/DBSample" name="_dbSampleForm">
+			<forward name="success" path="/jsp/db_sample/dbSampleResult.jsp"></forward>
+		</action>
+		<action path="/HhaDetail" name="_hhaDetailForm">
+			<forward name="success" path="/jsp/household_accounts/details.jsp"></forward>
+		</action>
+	</action-mappings>
+</struts-config>

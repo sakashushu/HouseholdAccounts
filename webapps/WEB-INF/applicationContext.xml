@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+<!-- アプリケーション全体のBean定義 -->
+
+<!-- ======================================== 各種フィルタコントローラ定義 -->
+  <!-- ログオン済みチェック設定例 -->
+  <!-- 
+  <bean id="authenticationController"
+        class="jp.terasoluna.sample.common.filter.SampleAuthenticationController">
+    <property name="authenticatedNoCheckPaths">
+      <list>
+        <!- - ログイン済みチェック対象外のパス - ->
+        <value>common.css</value>
+        <value>logon.do</value>
+        <value>welcome.do</value>
+      </list>
+    </property>
+  </bean>
+  -->
+
+  <!-- アクセス権限チェック設定例 -->
+  <!-- 
+  <bean id="authorizationController"
+        class="jp.terasoluna.sample.common.filter.SampleAuthorizationController">
+    <property name="authorizedCheckPaths">
+      <list>
+        <value>welcome.do</value>
+        <value>logon.do</value>
+        <value>common.css</value>
+      </list>
+    </property>
+    <property name="authorizedCodes">
+      <list>
+        <value>0</value>
+      </list>
+    </property>
+  </bean>
+  -->
+
+<!-- ======================================== データソース定義 -->
+  <!-- 
+     WTPを利用してTomcatを起動する場合、<ContextRoot>/META-INF/context.xmlに
+     データソースの接続情報を設定する。
+     またTomcatでJDBC接続を行う場合、各種JDBCドライバのjarにクラスパスを通すこと。
+  -->
+  <bean id="TerasolunaSampleDataSource"
+        class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiName">
+      <!-- Tomcatの例  -->
+      <value>java:comp/env/jdbc/TerasolunaSampleDataSource</value>
+      <!-- Tomcat以外のAPサーバの例 -->
+      <!-- 
+      <value>jdbc/TerasolunaSampleDataSource</value>
+      -->
+    </property>
+  </bean>
+
+<!-- ======================================== トランザクション・AOP定義 -->
+  <!-- トランザクションマネージャの定義 -->
+  <bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="TerasolunaSampleDataSource" />
+  </bean>
+
+  <!-- トランザクションインタセプタの定義 -->
+  <!-- 
+    トランザクションを設定するメソッドと実行モードを定義する。
+    transaction-manager="transactionManager" の設定は省略可能。
+  -->
+  <tx:advice id="transactionInterceptor" >
+    <tx:attributes>
+      <tx:method name="execute*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+    </tx:attributes>
+  </tx:advice>
+
+  <!-- AOPの定義 -->
+  <!-- 
+    下記で指定したパターンのBeanに対してインタセプタを適用する。
+    applicationContext.xmlで定義されたBeanのみ対象となるので注意すること。
+   -->  
+  <aop:config>
+    <aop:pointcut id="daoBeans" expression="bean(*DAO)"/>
+    <aop:advisor pointcut-ref="daoBeans" 
+                 advice-ref="transactionInterceptor"/>
+  </aop:config>
+
+<!-- ======================================== リソースバンドル定義 -->
+  <!-- プロパティファイル利用 -->
+  <!-- 
+    basenamesプロパティでメッセージプロパティファイルを設定する。
+   -->  
+  <bean id="messageSource" 
+        class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames" value="application-messages, system-messages"/>
+  </bean>
+
+  <!-- DBメッセージ利用(第2メッセージリソースにプロパティファイル利用)設定例 -->
+  <!--
+    別途applicationContext.xmlにてDBMessageResourceDAOの設定が必要
+  -->
+  <!-- 
+  <bean id="messageSource" 
+        class="jp.terasoluna.fw.message.DataSourceMessageSource">
+    <property name="parentMessageSource" ref="propertyMessageSource"/>
+    <property name="dbMessageResourceDAO" ref="dbMessageResourceDAO"/>
+    <property name="defaultLocale"  value="ja_JP"/>
+  </bean>
+
+  <bean id="propertyMessageSource" 
+        class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames" value="application-messages, system-messages"/>
+  </bean>
+  -->
+
+  <!-- プロパティファイル利用(第2メッセージリソースにDBメッセージ利用)設定例 -->
+  <!--
+    別途applicationContext.xmlにてDBMessageResourceDAOの設定が必要
+  -->
+  <!-- 
+  <bean id="messageSource" 
+        class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames" value="application-messages, system-messages"/>
+    <property name="parentMessageSource" ref="dbMessageSource"/>
+  </bean>
+
+  <bean id="dbMessageSource" 
+        class="jp.terasoluna.fw.message.DataSourceMessageSource">
+    <property name="dbMessageResourceDAO" ref="dbMessageResourceDAO"/>
+    <property name="defaultLocale"  value="ja_JP"/>
+  </bean>
+  -->
+
+<!-- ======================================== iBATIS定義 -->
+  <!-- SqlMap定義 -->
+  <bean id="sqlMapClient"
+        class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+    <property name="configLocation" value="WEB-INF/sqlMapConfig.xml">
+    </property>
+    <property name="dataSource" ref="TerasolunaSampleDataSource" />
+  </bean>
+
+   <!-- 照会系のDAO定義 -->
+  <bean id="queryDAO" 
+        class="jp.terasoluna.fw.dao.ibatis.QueryDAOiBatisImpl">
+    <property name="sqlMapClient" ref="sqlMapClient" />
+  </bean>
+  
+  <!-- 更新系のDAO定義 -->
+  <bean id="updateDAO"
+        class="jp.terasoluna.fw.dao.ibatis.UpdateDAOiBatisImpl">
+    <property name="sqlMapClient" ref="sqlMapClient" />
+  </bean>
+  
+  <!-- ストアドプロシジャ用のDAO定義 -->
+  <bean id="spDAO"
+        class="jp.terasoluna.fw.dao.ibatis.StoredProcedureDAOiBatisImpl">
+    <property name="sqlMapClient" ref="sqlMapClient" />
+  </bean>
+  
+  <!-- ローハンドラ用のDAO定義 -->
+  <bean id="queryRowHandleDAO"
+        class="jp.terasoluna.fw.dao.ibatis.QueryRowHandleDAOiBatisImpl">
+    <property name="sqlMapClient" ref="sqlMapClient" />
+  </bean>
+  
+  <!-- DBメッセージリソース用DAO定義 -->
+  <!-- 
+    applicationContext.xmlでDBメッセージリソースの定義がされている場合は、
+    下記のコメントアウトを解除してDBメッセージリソース用DAOの設定を有効にすること。
+   -->
+  <!-- 
+  <bean id="DBMessageResourceDAO" 
+        class="jp.terasoluna.fw.message.DBMessageResourceDAOImpl">
+    <property name="dataSource" ref="TerasolunaSampleDataSource"/>
+    <property name="tableName"      value="MESSAGES"/>
+    <property name="codeColumn"     value="CODE"/>
+    <property name="messageColumn"  value="MESSAGE"/>                        
+    <property name="languageColumn" value="LANGUAGES"/>
+    <property name="countryColumn"  value="COUNTRY"/>
+    <property name="variantColumn"  value="VARIANT"/>                    
+  </bean>
+  -->
+
+<!-- ======================================== コードリスト定義 -->
+  <!-- プロパティコードリスト設定例 -->
+  <!-- 
+  <bean id="CL006_AUTH"
+        class="jp.terasoluna.fw.web.codelist.MappedCodeListLoader"
+        init-method="load">
+    <property name="codeListMap">
+      <map>
+        <entry key="1">
+          <value>オペレータ</value>
+        </entry>
+        <entry key="0">
+          <value>管理者</value>
+        </entry>
+      </map>
+    </property>
+  </bean>
+  -->
+
+  <!-- DBコードリスト設定例 -->
+  <!-- 
+  <bean id="XXXXX"
+        class="jp.terasoluna.fw.web.codelist.DBCodeListLoader"
+        init-method="load">
+  <property name="dataSource" ref="TerasolunaSampleDataSource"/>
+    <property name="sql">
+      <value>SELECT CODE, NAME FROM DBCODELIST ORDER BY CODE</value>
+    </property>
+  </bean>
+  -->  
+
+</beans>

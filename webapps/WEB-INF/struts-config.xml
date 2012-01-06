@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+<!-- ======================================== フォームビーン定義 -->
+    <!-- 設定例
+    <form-beans>
+      <form-bean name="_userForm"
+                 type="jp.terasoluna.sample.common.form.UserForm" />
+      <form-bean name="_dynaValidatorForm"
+                 type="jp.terasoluna.fw.web.struts.form.DynaValidatorActionFormEx" >
+        <form-property name="userId" type="java.lang.String"/>
+      </form-bean>
+    </form-beans>
+    -->
+  <form-beans/>
+
+<!-- ======================================== グローバル例外ハンドリング定義 -->
+  <global-exceptions>
+    <!-- 設定例 -->
+    <exception key="errors.default.mesasge"
+               path="/error.jsp"
+               className="jp.terasoluna.fw.web.struts.action.ExceptionConfigEx"
+               handler="jp.terasoluna.fw.web.struts.action.SystemExceptionHandler"
+               type="jp.terasoluna.fw.exception.SystemException">
+      <set-property property="logLevel" value="error"/>
+    </exception>
+    <exception key="errors.default.mesasge"
+               path="/error.jsp"
+               className="jp.terasoluna.fw.web.struts.action.ExceptionConfigEx"
+               handler="jp.terasoluna.fw.web.struts.action.DefaultExceptionHandler"
+               type="java.lang.Exception">
+      <set-property property="logLevel" value="error"/>
+    </exception>
+  </global-exceptions>
+
+<!-- ======================================== グローバルフォワード定義 -->
+  <global-forwards>
+    <forward name="welcome"
+             path="/welcome.do" redirect="true"/>
+  </global-forwards>
+
+<!-- ======================================== アクションマッピング定義 -->
+  <action-mappings type="jp.terasoluna.fw.web.struts.action.ActionMappingEx">
+
+    <action path="/welcome" parameter="/welcome.jsp"/>
+
+  </action-mappings>
+
+<!-- ======================================== コントローラ定義 -->
+  <controller processorClass="jp.terasoluna.fw.web.struts.action.RequestProcessorEx"/>
+
+<!-- ======================================== メッセージリソース定義 -->
+  <message-resources
+    factory="jp.terasoluna.fw.web.struts.util.SpringMessageResourcesFactory"
+    parameter="messageSource" />
+
+<!-- ======================================== プラグイン定義 -->
+  <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+    <set-property property="contextConfigLocation"
+                  value="/WEB-INF/moduleContext.xml,/WEB-INF/xml/moduleContext-sample.xml"/>
+  </plug-in>
+
+  <plug-in className="jp.terasoluna.fw.web.struts.plugins.ResetterPlugIn">
+    <set-property
+      property="resetter"
+      value="jp.terasoluna.fw.web.struts.reset.ResetterImpl"/>
+    <set-property
+      property="resources"
+      value="/WEB-INF/reset.xml"/>
+    <set-property
+      property="digesterRules"
+      value="/WEB-INF/reset-rules.xml"/>
+  </plug-in>
+
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property
+      property="pathnames"
+      value="/WEB-INF/validator-rules.xml,/WEB-INF/validator-rules-ex.xml,/WEB-INF/validation.xml,/WEB-INF/xml/validation-sample.xml"/>
+    <set-property
+      property="stopOnFirstError"
+      value="false"/>
+  </plug-in>
+
+  <plug-in className="jp.terasoluna.fw.web.struts.plugins.BLogicIOPlugIn">
+    <set-property
+      property="resources"
+      value="/WEB-INF/blogic-io.xml,/WEB-INF/xml/blogic-io-sample.xml"/>
+    <set-property
+      property="digesterRules"
+      value="/WEB-INF/blogic-io-rules.xml"/>
+    <set-property
+      property="mapperClass"
+      value="jp.terasoluna.fw.service.thin.BLogicMapper"/>
+  </plug-in>
+
+</struts-config>

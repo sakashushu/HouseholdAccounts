@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<digester-rules>
+  <pattern value="reset/action">
+      <object-create-rule classname="jp.terasoluna.fw.web.struts.reset.ActionReset" />
+      <set-properties-rule>
+        <alias attr-name="path" prop-name="path" />
+      </set-properties-rule>
+      <pattern value="property-reset">
+        <object-create-rule classname="jp.terasoluna.fw.web.struts.reset.FieldReset" />
+        <set-properties-rule>
+          <alias attr-name="name" prop-name="fieldName" />
+          <alias attr-name="select" prop-name="select" />
+        </set-properties-rule>
+        <set-next-rule methodname="setFieldReset" />
+      </pattern>
+      <set-next-rule methodname="setActionReset" />
+    </pattern>
+</digester-rules>

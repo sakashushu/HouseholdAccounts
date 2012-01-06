@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE form-validation PUBLIC
+          "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.3.0//EN"
+          "http://jakarta.apache.org/commons/dtds/validator_1_3_0.dtd">
+
+<form-validation>
+   <global>
+
+<!--== Validatorフレームワーク拡張ルール(TERASOLUNA) ==-->
+      <!-- 半角英数字 -->
+      <validator name="alphaNumericString"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateAlphaNumericString"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.alphaNumericString"
+           jsFunction="jp.terasoluna.fw.web.struts.form.javascript.validateAlphaNumericString">
+      </validator>
+
+      <!-- 半角カナ -->
+      <validator name="hankakuKanaString"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateHankakuKanaString"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.hankakuKanaString"
+           jsFunction="jp.terasoluna.fw.web.struts.form.javascript.validateHankakuKanaString">
+      </validator>
+
+      <!-- 半角文字列 -->
+      <validator name="hankakuString"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateHankakuString"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.hankakuString"
+           jsFunction="jp.terasoluna.fw.web.struts.form.javascript.validateHankakuString">
+      </validator>
+
+      <!-- 全角文字列 -->
+      <validator name="zenkakuString"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateZenkakuString"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.zenkakuString"
+           jsFunction="jp.terasoluna.fw.web.struts.form.javascript.validateZenkakuString">
+      </validator>
+
+      <!-- 全角カナ文字列 -->
+      <validator name="zenkakuKanaString"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateZenkakuKanaString"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.zenkakuKanaString"
+           jsFunction="jp.terasoluna.fw.web.struts.form.javascript.validateZenkakuKanaString">
+      </validator>
+
+      <!-- 大文字英数字 -->
+      <validator name="capAlphaNumericString"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateCapAlphaNumericString"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.capAlphaNumericString"
+           jsFunction="jp.terasoluna.fw.web.struts.form.javascript.validateCapAlphaNumericString">
+      </validator>
+
+      <!-- 数値 -->
+      <validator name="number"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateNumber"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.number"
+           jsFunction="jp.terasoluna.fw.web.struts.form.javascript.validateNumber">
+      </validator>
+
+      <!-- 数字文字列 -->
+      <validator name="numericString"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateNumericString"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.numericString"
+           jsFunction="jp.terasoluna.fw.web.struts.form.javascript.validateNumericString">
+      </validator>
+
+      <!-- 禁止文字列 -->
+      <validator name="prohibited"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateProhibited"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.prohibited">
+      </validator>
+
+      <!-- 文字列長一致 -->
+      <validator name="stringLength"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateStringLength"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.stringLength"
+           jsFunction="jp.terasoluna.fw.web.struts.form.javascript.validateStringLength">
+      </validator>
+
+      <!-- 日付範囲 -->
+      <validator name="dateRange"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateDateRange"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.dateRange"
+           jsFunction="jp.terasoluna.fw.web.struts.form.javascript.validateDateRange">
+      </validator>
+
+      <!-- バイト列長一致 -->
+      <validator name="byteLength"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateByteLength"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.byteLength">
+      </validator>
+
+      <!-- バイト範囲 -->
+      <validator name="byteRange"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateByteRange"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.byteRange">
+      </validator>
+
+      <!-- 複数フィールドチェック -->
+      <validator name="multiField"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateMultiField"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="">
+      </validator>
+
+<!--== 一覧入力用検証ルール(TERASOLUNA) ==-->
+      <!-- 半角英数字 -->
+      <validator name="alphaNumericStringArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.alphaNumericStringArray">
+      </validator>
+
+      <!-- 半角カナ -->
+      <validator name="hankakuKanaStringArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.hankakuKanaStringArray">
+      </validator>
+
+      <!-- 半角文字列 -->
+      <validator name="hankakuStringArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.hankakuStringArray">
+      </validator>
+
+      <!-- 全角文字列 -->
+      <validator name="zenkakuStringArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.zenkakuStringArray">
+      </validator>
+
+      <!-- 全角カナ文字列 -->
+      <validator name="zenkakuKanaStringArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.zenkakuKanaStringArray">
+      </validator>
+
+      <!-- 大文字英数字 -->
+      <validator name="capAlphaNumericStringArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.capAlphaNumericStringArray">
+      </validator>
+
+      <!-- 数値 -->
+      <validator name="numberArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.numberArray">
+      </validator>
+
+
+
+      <!-- 数字文字列 -->
+      <validator name="numericStringArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.numericStringArray">
+      </validator>
+
+      <!-- 禁止文字列 -->
+      <validator name="prohibitedArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.prohibitedArray">
+      </validator>
+
+      <!-- 文字列長一致 -->
+      <validator name="stringLengthArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.stringLengthArray">
+      </validator>
+
+      <!-- 日付範囲 -->
+      <validator name="dateRangeArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.dateRangeArray">
+      </validator>
+
+      <!-- バイト列長一致 -->
+      <validator name="byteLengthArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.byteLengthArray">
+      </validator>
+
+      <!-- バイト範囲 -->
+      <validator name="byteRangeArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.byteRangeArray">
+      </validator>
+
+
+<!--== 一覧入力用検証ルール(Struts) ==-->
+      <!-- 入力必須 -->
+      <validator name="requiredArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.requiredArray">
+      </validator>
+
+      <!-- 最小桁数 -->
+      <validator name="minLengthArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.minlengthArray">
+      </validator>
+
+      <!-- 最大桁数 -->
+      <validator name="maxLengthArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.maxlengthArray">
+      </validator>
+
+      <!-- 正規表現 -->
+      <validator name="maskArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.maskArray">
+      </validator>
+
+      <!-- byte値 -->
+      <validator name="byteArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.byteArray">
+      </validator>
+
+      <!-- short値 -->
+      <validator name="shortArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.shortArray">
+      </validator>
+
+      <!-- integer値 -->
+      <validator name="integerArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.integerArray">
+      </validator>
+
+      <!-- long値 -->
+      <validator name="longArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.longArray">
+      </validator>
+
+      <!-- float値 -->
+      <validator name="floatArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.floatArray">
+      </validator>
+
+      <!-- double値 -->
+      <validator name="doubleArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.doubleArray">
+      </validator>
+
+      <!-- 日付型 -->
+      <validator name="dateArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.dateArray">
+      </validator>
+
+      <!-- 整数値範囲 -->
+      <validator name="intRangeArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.intRangeArray">
+      </validator>
+
+      <!-- double値範囲 -->
+      <validator name="doubleRangeArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.doubleRangeArray">
+      </validator>
+
+      <!-- 浮動小数点値範囲 -->
+      <validator name="floatRangeArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.floatRangeArray">
+      </validator>
+
+      <!-- クレジットカードフォーマット -->
+      <validator name="creditCardArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.creditCardArray">
+      </validator>
+
+      <!-- eメールアドレスフォーマット -->
+      <validator name="emailArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.emailArray">
+      </validator>
+
+      <!-- URLフォーマット -->
+      <validator name="urlArray"
+            classname="jp.terasoluna.fw.web.struts.form.FieldChecksEx"
+               method="validateArraysIndex"
+         methodParams="java.lang.Object,
+                       org.apache.commons.validator.ValidatorAction,
+                       org.apache.commons.validator.Field,
+                       org.apache.struts.action.ActionMessages,
+                       org.apache.commons.validator.Validator,
+                       javax.servlet.http.HttpServletRequest"
+                  msg="errors.urlArray">
+      </validator>
+
+     <validator name="includeJavaScriptUtilitiesEx"
+            classname=""
+               method=""
+         methodParams=""
+              depends=""
+                  msg=""
+           jsFunction="jp.terasoluna.fw.web.struts.form.javascript.validateUtilitiesEx"/>
+
+   </global>
+</form-validation>

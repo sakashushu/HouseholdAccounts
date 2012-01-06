@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE reset PUBLIC "-//NTTDATA//DTD TERASOLUNA for Spring reset 1.0//JA"
+                       "dtd/reset.dtd">
+<!-- フォームプロパティリセット定義 -->
+<reset>
+<!--
+  <action path="/bbb/BBB">
+    <property-reset name="field1" />
+    <property-reset name="field2" select="true" />
+    <property-reset name="field3" select="true" />
+  </action>
+-->
+</reset>

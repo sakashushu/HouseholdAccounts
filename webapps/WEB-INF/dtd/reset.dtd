@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ========== Elements ==================== -->
+
+<!-- top level element -->
+<!ELEMENT reset                 (action*)>
+
+<!-- action -->
+<!ELEMENT action                (property-reset+)>
+<!ATTLIST action         path   CDATA        #REQUIRED>
+
+<!-- property -->
+<!ELEMENT property-reset        EMPTY>
+<!ATTLIST property-reset name   CDATA        #REQUIRED
+                       select (true|false) "false">

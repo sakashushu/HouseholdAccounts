@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE form-validation PUBLIC
+          "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.3.0//EN"
+          "http://jakarta.apache.org/commons/dtds/validator_1_3_0.dtd">
+<!-- 入力値検証定義 -->
+<form-validation>
+<!--
+    <formset>
+
+      <form name="/isValid">
+        <field property="codeArray" indexedListProperty="codeArray"
+            depends="prohibitedArray">
+          <arg key="##INDEX" resource="false" position="0"/>
+          <arg key="testValidate.codeArray" position="1"/>
+          <arg key="${var:chars}" resource="false" position="2"/>
+          <var>
+            <var-name>chars</var-name>
+            <var-value>!"#</var-value>
+          </var>
+        </field>
+      </form>
+    </formset>
+ -->
+</form-validation>

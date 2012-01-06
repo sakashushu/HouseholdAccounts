@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap 
+            PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+            "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- SqlMap定義 -->
+<sqlMap namespace="user">
+
+<!-- 設定例
+  <select id="selectUsers" 
+          resultClass="jp.terasoluna.sample.user.dao.SelectUsersOutput">
+    SELECT
+        ID AS "userId",
+        NAME AS "userName"
+    FROM
+        USERLIST
+  </select>
+  
+  <select id="getUserCount"
+          parameterClass="jp.terasoluna.sample.user.dao.GetUserCountInput"
+          resultClass="jp.terasoluna.sample.user.dao.GetUserCountOutput">
+    SELECT
+        COUNT (*) AS userCount
+    FROM
+        USERLIST
+    WHERE
+        ID = #userId#
+  </select>
+
+  <insert id="insertUser"
+          parameterClass="jp.terasoluna.sample.user.dao.InsertUserInput">
+    INSERT INTO USERLIST (
+        ID,
+        NAME
+    )
+    VALUES (
+        #userId#,
+        #userName#
+    )
+  </insert>
+  
+  <update id="updateUser"
+          parameterClass="jp.terasoluna.sample.user.dao.UpdateUserInput">
+    UPDATE USERLIST
+    SET
+        NAME = #userName#
+    WHERE
+        ID = #userId#
+  </update>
+  
+  <delete id="deleteUser"
+          parameterClass="jp.terasoluna.sample.user.dao.DeleteUserInput">
+    DELETE FROM
+        USERLIST
+    WHERE
+        ID = #userId#
+  </delete>
+-->
+
+	<select id="dbSample"
+		parameterClass="blogic.io.DBSampleInput"
+		resultClass="blogic.io.SearchResult">
+		SELECT
+				ID,
+				NAME,
+				AGE
+		FROM
+				USER_TBL
+		<dynamic prepend="WHERE">
+			<isNotEmpty property="search_kbn">
+				<isNotEmpty property="search_condition">
+					<isEqual property="search_kbn" compareValue="id">
+						ID = #search_condition#
+					</isEqual>
+					<isEqual property="search_kbn" compareValue="name">
+						NAME = #search_condition#
+					</isEqual>
+				</isNotEmpty>
+			</isNotEmpty>
+		</dynamic>		
+	</select>
+
+	<select id="ha_DetailSrchSel"
+		parameterClass="hha.model.HHA_RecordsSelBean"
+		resultClass="hha.blogic.io.HHA_DetailResult">
+		SELECT
+				payment_date,
+				payment_time,
+				item_name
+		FROM
+				records
+<!--
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="year_fr">
+				to_char(payment_date, 'yyyy') >= to_char(#year_fr#, 'fm0000')
+				<isNotEmpty prepend="AND" property="month_fr">
+					to_char(payment_date, 'mm') >= to_char(#month_fr#, 'fm00')
+				</isNotEmpty>
+			</isNotEmpty>
+		</dynamic>
+ -->
+		WHERE
+			payment_date BETWEEN TO_DATE(#payDateFr#, 'YYYYMMDD') AND TO_DATE(#payDateTo#, 'YYYYMMDD')
+	</select>
+
+</sqlMap>
